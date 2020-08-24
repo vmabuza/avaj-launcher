@@ -1,4 +1,4 @@
-package com.vmabuza.avajLauncher.aircraft;
+package com.vmabuza.avajLauncher.Aircrafts;
 
 public class Coordinates {
     private int longitude;
