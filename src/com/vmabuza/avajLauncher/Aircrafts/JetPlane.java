@@ -4,10 +4,10 @@ import com.vmabuza.avajLauncher.Weather.WeatherTower;
 import com.vmabuza.avajLauncher.Weather.Tower;
 import com.vmabuza.avajLauncher.Interface.Flyable;
 
-public class Baloon extends Aircraft implements Flyable {
+public class JetPlane extends Aircraft implements Flyable {
     private WeatherTower weatherTower;
 
-    Baloon(String name, Coordinates coordinates) {
+    JetPlane(String name, Coordinates coordinates) {
         super(name, coordinates);
     }
 
@@ -15,41 +15,41 @@ public class Baloon extends Aircraft implements Flyable {
         String weatherType = weatherTower.getWeather(this.coordinates);
         String regToFile = "";
         String unregToFile = "";
-        String temp = "Baloon#" + this.name + "(" + this.id + "): ";
+        String temp = "JetPlane#" + this.name + "(" + this.id + "): ";
 
         if(weatherType == "RAIN"){
             coordinates = new Coordinates(
                     coordinates.getLongitude(),
-                    coordinates.getLatitude(),
-                    coordinates.getHeight() - 5);
+                    coordinates.getLatitude() + 5,
+                    coordinates.getHeight());
             regToFile = temp + "This rain is depressing...\n";
         }
         else if(weatherType == "SUN") {
             coordinates = new Coordinates(
-                    coordinates.getLongitude() + 2,
-                    coordinates.getLatitude(),
-                    coordinates.getHeight() + 4);
+                    coordinates.getLongitude(),
+                    coordinates.getLatitude() + 10,
+                    coordinates.getHeight() + 2);
             regToFile = temp + "It is extremely hot...\n";
         }
         else if(weatherType == "FOG") {
             coordinates = new Coordinates(
                     coordinates.getLongitude(),
-                    coordinates.getLatitude(),
-                    coordinates.getHeight() - 3);
+                    coordinates.getLatitude() + 1,
+                    coordinates.getHeight());
             regToFile = temp + "It is too foggy...\n";
         }
         else if(weatherType == "SNOW") {
             coordinates = new Coordinates(
                     coordinates.getLongitude(),
                     coordinates.getLatitude(),
-                    coordinates.getHeight() - 15);
+                    coordinates.getHeight() - 7);
             regToFile = temp + "Winter has arrived...\n";
         }
 
         weatherTower.writeToFile("write", regToFile);
 
         if(this.coordinates.getHeight() < 0) {
-            unregToFile = "Tower says: Baloon#" + this.name + "(" + this.id + ") unregistered from Weather Tower.\n";
+            unregToFile = "Tower says: JetPlane#" + this.name + "(" + this.id + ") unregistered from Weather Tower.\n";
             weatherTower.writeToFile("write", unregToFile);
             weatherTower.unregister(this);
         }
@@ -57,7 +57,7 @@ public class Baloon extends Aircraft implements Flyable {
 
     public void registerTower(WeatherTower weatherTower) {
         weatherTower.register(this);
-        String write = "Tower says: Baloon#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
+        String write = "Tower says: JetPlane#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;
         weatherTower.writeToFile("write", write);
     }

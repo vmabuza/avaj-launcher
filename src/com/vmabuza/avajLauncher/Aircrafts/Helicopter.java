@@ -20,30 +20,29 @@ public class Helicopter extends Aircraft implements Flyable {
         if(weatherType == "RAIN"){
             coordinates = new Coordinates(
                     coordinates.getLongitude() + 5,
-                    coordinates.getLatitude();
+                    coordinates.getLatitude(),
                     coordinates.getHeight());
             regToFile = temp + "This rain is depressing...\n";
         }
         else if(weatherType == "SUN") {
             coordinates = new Coordinates(
                     coordinates.getLongitude() + 10,
-                    coordinates.getLatitude();
+                    coordinates.getLatitude(),
                     coordinates.getHeight() + 2);
             regToFile = temp + "It is extremely hot...\n";
         }
         else if(weatherType == "FOG") {
             coordinates = new Coordinates(
                     coordinates.getLongitude() + 1,
-                    coordinates.getLatitude();
-                    coordinates.getHeight()
-        );
+                    coordinates.getLatitude(),
+                    coordinates.getHeight());
             regToFile = temp + "It is too foggy...\n";
         }
         else if(weatherType == "SNOW") {
             coordinates = new Coordinates(
                     coordinates.getLongitude(),
-                    coordinates.getLatitude();
-            coordinates.getHeight() - 12);
+                    coordinates.getLatitude(),
+                    coordinates.getHeight() - 12);
             regToFile = temp + "Winter has arrived...\n";
         }
 
