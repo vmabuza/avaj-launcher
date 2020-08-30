@@ -1,4 +1,4 @@
-package com.vmabuza.avajLauncher.Aircraft;
+package com.vmabuza.avajLauncher.Aircrafts;
 
 import com.vmabuza.avajLauncher.Interface;
 
