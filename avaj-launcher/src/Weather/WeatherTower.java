@@ -12,10 +12,6 @@ public class WeatherTower extends Tower {
     private static BufferedWriter bufferedWriter;
 
     public void writeToFile(String str) {
-
-
-
-
         try {
 
             file = new File("simulation.txt");
@@ -25,7 +21,6 @@ public class WeatherTower extends Tower {
 
             bufferedWriter.newLine();
             bufferedWriter.write(str);
-//            bufferedWriter.flush();
             bufferedWriter.close();
         }
         catch (IOException whatever) {

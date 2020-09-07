@@ -11,7 +11,7 @@ public class Helicopter extends Aircraft implements Flyable {
     }
 
     public void updateConditions() {
-//        System.out.println("We're in a Helicopter");
+
         String weatherType = weatherTower.getWeather(this.coordinates);
         String regToFile = "";
         String unregToFile = "";
@@ -29,7 +29,7 @@ public class Helicopter extends Aircraft implements Flyable {
                     coordinates.getLongitude() + 10,
                     coordinates.getLatitude(),
                     coordinates.getHeight() + 2);
-            regToFile = temp + "It is -----------%%%%%extremely hot...\n";
+            regToFile = temp + "It is extremely hot...\n";
         }
         else if(weatherType == "FOG") {
             coordinates = new Coordinates(
@@ -55,10 +55,7 @@ public class Helicopter extends Aircraft implements Flyable {
         }
     }
 
-
-
     public void registerTower(WeatherTower weatherTower) {
-        System.out.println("We're registering to tower");
         weatherTower.register(this);
         String write = "Tower says: Helicopter#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;

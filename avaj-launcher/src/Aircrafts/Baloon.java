@@ -14,7 +14,7 @@ public class Baloon extends Aircraft implements Flyable {
     }
 
     public void updateConditions() throws IOException {
-//        System.out.println("We're in a baloon");
+
         String weatherType = weatherTower.getWeather(this.coordinates);
         String regToFile = "";
         String unregToFile = "";
@@ -49,10 +49,7 @@ public class Baloon extends Aircraft implements Flyable {
             regToFile = temp + "Winter has arrived...\n";
         }
 
-//        weatherTower.writeToFile(regToFile);
-        write.writeToFile("Eslkdlskd");
         write.writeToFile(regToFile);
-        write.writeToFile("Hello world!");
 
         if(this.coordinates.getHeight() < 0) {
             unregToFile = "Tower says: Baloon#" + this.name + "(" + this.id + ") unregistered from Weather Tower.\n";
@@ -66,6 +63,5 @@ public class Baloon extends Aircraft implements Flyable {
         String write = "Tower says: Baloon#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;
         weatherTower.writeToFile(write);
-        System.out.println("We're registering to tower");
     }
 }

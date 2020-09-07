@@ -10,9 +10,8 @@ public class JetPlane extends Aircraft implements Flyable {
         super(name, coordinates);
     }
 
-    @Override
     public void updateConditions() {
-//        System.out.println("We're in a Jetplane");
+
         String weatherType = weatherTower.getWeather(this.coordinates);
         String regToFile = "";
         String unregToFile = "";
@@ -56,10 +55,7 @@ public class JetPlane extends Aircraft implements Flyable {
         }
     }
 
-
-    @Override
     public void registerTower(WeatherTower weatherTower) {
-        System.out.println("We're registering to tower");
         weatherTower.register(this);
         String write = "Tower says: JetPlane#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;
