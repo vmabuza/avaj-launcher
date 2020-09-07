@@ -14,46 +14,59 @@ public class Simulator {
     public static void main(String[] args) throws IOException {
 
 
-        if(args.length == 0){
-            System.out.println("Please pass an argument!");
-            System.exit(1);
-        }
-        BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+        try {
+            if(args.length == 0) {
+                System.out.println("Invalid input");
+                System.exit(1);
+                //return;
+            }
+            BufferedReader reader = new BufferedReader(new FileReader("scenario.txt"));
 
-        String str = reader.readLine();
-        int sim = Integer.parseInt(str.split(" ")[0]);
+            String line = reader.readLine();
 
-
-            if (str != null) {
+            if (line != null) {
 
                 weatherTower = new WeatherTower();
 
+                int simulations = Integer.parseInt(line.split(" ")[0]);
 
-                if (sim <= 0) {
+                if (simulations < 0) {
+                    System.out.println("Invalid simulation count can't be negative  ");
                     System.exit(1);
                 }
-            }
-            while ((str = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null) {
 
-              Flyable flyable =  AircraftFactory.newAircraft(str.split(" ")[0],str.split(" ")[1],Integer.parseInt(str.split(" ")[2]),Integer.parseInt(str.split(" ")[3]),Integer.parseInt(str.split(" ")[4]));
-//              System.out.println(str.split(" ")[1]);
-//              System.out.println(flyable);
 
-              if(flyable != null){
-                  aircraftList.add(flyable);
-              }
-            }
-            for (Flyable flyable : aircraftList) {
-                flyable.registerTower(weatherTower);
-//                System.out.println("Yeah we're winning");
-//                System.out.println();
-            }
+                    Flyable flyable = AircraftFactory.newAircraft(line.split(" ")[0], line.split(" ")[1],
+                            Integer.parseInt(line.split(" ")[2]), Integer.parseInt(line.split(" ")[3]),
+                            Integer.parseInt(line.split(" ")[4]));
 
-            for (int i = 1; i <= sim; i++) {
-                String simToWrite = "\nSimulation: " + i + "\n";
-                weatherTower.writeToFile(simToWrite);
-                weatherTower.changeWeather();
+                    if (flyable != null)
+                        aircraftList.add(flyable);
+                }
+                WeatherTower write = new WeatherTower();
+
+                for (Flyable flyable : aircraftList ) {
+                    flyable.registerTower(weatherTower);
+                }
+
+                for (int i = 1; i <= simulations; i++) {
+                    write.writeToFile("\n"+"count" + i);
+                    weatherTower.changeWeather();
+                }
             }
-            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Couldn't find file " + args[0]);
+        } catch (IOException e) {
+            System.out.println("Something went wrong while reading the file " + args[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("You did not specify the simulation file");
+        } catch (NullPointerException e) {
+            System.out.println("value is null");
+        } catch (NumberFormatException e) {
+            System.out.println("not a valid number entered in file");
+        } finally {
+//            WriteFile.getWriteFile().close();
+        }
     }
 }

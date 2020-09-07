@@ -3,14 +3,17 @@ package Aircrafts;
 import Weather.*;
 import Interface.*;
 
+import java.io.IOException;
+
 public class Baloon extends Aircraft implements Flyable {
     private WeatherTower weatherTower;
+    public WeatherTower write = new WeatherTower();
 
     Baloon(String name, Coordinates coordinates) {
         super(name, coordinates);
     }
 
-    public void updateConditions(){
+    public void updateConditions() throws IOException {
 //        System.out.println("We're in a baloon");
         String weatherType = weatherTower.getWeather(this.coordinates);
         String regToFile = "";
@@ -46,7 +49,10 @@ public class Baloon extends Aircraft implements Flyable {
             regToFile = temp + "Winter has arrived...\n";
         }
 
-        weatherTower.writeToFile(regToFile);
+//        weatherTower.writeToFile(regToFile);
+        write.writeToFile("Eslkdlskd");
+        write.writeToFile(regToFile);
+        write.writeToFile("Hello world!");
 
         if(this.coordinates.getHeight() < 0) {
             unregToFile = "Tower says: Baloon#" + this.name + "(" + this.id + ") unregistered from Weather Tower.\n";
@@ -55,7 +61,7 @@ public class Baloon extends Aircraft implements Flyable {
         }
     }
 
-    public void registerTower(WeatherTower weatherTower) {
+    public void registerTower(WeatherTower weatherTower) throws IOException {
         weatherTower.register(this);
         String write = "Tower says: Baloon#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;

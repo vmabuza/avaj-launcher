@@ -1,5 +1,6 @@
 package Weather;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Tower {
         observers.remove(flyable);
     }
 
-    protected void conditionsChanged() {
+    protected void conditionsChanged() throws IOException {
         for (int i = 0; i < observers.size(); i++) {
             observers.get(i).updateConditions();
         }

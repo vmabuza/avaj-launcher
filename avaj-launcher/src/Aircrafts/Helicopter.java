@@ -29,9 +29,8 @@ public class Helicopter extends Aircraft implements Flyable {
                     coordinates.getLongitude() + 10,
                     coordinates.getLatitude(),
                     coordinates.getHeight() + 2);
-            regToFile = temp + "It is extremely hot...\n";
+            regToFile = temp + "It is -----------%%%%%extremely hot...\n";
         }
-        //32-49 printing
         else if(weatherType == "FOG") {
             coordinates = new Coordinates(
                     coordinates.getLongitude() + 1,
@@ -55,6 +54,7 @@ public class Helicopter extends Aircraft implements Flyable {
             weatherTower.unregister(this);
         }
     }
+
 
 
     public void registerTower(WeatherTower weatherTower) {
