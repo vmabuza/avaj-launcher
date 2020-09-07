@@ -1,11 +1,16 @@
 package Simulator;
 
-import Interface.*;
-import Aircrafts.*;
-import Weather.*;
-import java.util.*;
-import java.io.*;
+import Aircrafts.AircraftFactory;
+import Interface.Flyable;
+import Weather.WeatherTower;
+import Write.WriteToFile;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Simulator {
     private static WeatherTower weatherTower;
@@ -44,6 +49,7 @@ public class Simulator {
                     if (flyable != null)
                         aircraftList.add(flyable);
                 }
+
                 WeatherTower write = new WeatherTower();
 
                 for (Flyable flyable : aircraftList ) {
@@ -51,7 +57,7 @@ public class Simulator {
                 }
 
                 for (int i = 1; i <= simulations; i++) {
-                    write.writeToFile("\n"+"count" + i);
+                    WriteToFile.getWriteFile().writingToFile("\n"+"count" + i);
                     weatherTower.changeWeather();
                 }
             }
@@ -66,7 +72,7 @@ public class Simulator {
         } catch (NumberFormatException e) {
             System.out.println("not a valid number entered in file");
         } finally {
-//            WriteFile.getWriteFile().close();
+            WriteToFile.getWriteFile().close();
         }
     }
 }

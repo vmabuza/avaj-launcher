@@ -2,6 +2,7 @@ package Aircrafts;
 
 import Weather.*;
 import Interface.*;
+import Write.*;
 
 public class Helicopter extends Aircraft implements Flyable {
     private WeatherTower weatherTower;
@@ -46,19 +47,19 @@ public class Helicopter extends Aircraft implements Flyable {
             regToFile = temp + "Winter has arrived...\n";
         }
 
-        weatherTower.writeToFile(regToFile);
+        WriteToFile.getWriteFile().writingToFile(regToFile);
 
         if(this.coordinates.getHeight() < 0) {
             unregToFile = "Tower says: Helicopter#" + this.name + "(" + this.id + ") unregistered from Weather Tower.\n";
-            weatherTower.writeToFile(unregToFile);
+            WriteToFile.getWriteFile().writingToFile(unregToFile);
             weatherTower.unregister(this);
         }
     }
 
     public void registerTower(WeatherTower weatherTower) {
-        weatherTower.register(this);
-        String write = "Tower says: Helicopter#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
         this.weatherTower = weatherTower;
-        weatherTower.writeToFile(write);
+        String write = "Tower says: Helicopter#" + this.name + "(" + this.id + ") registered to Weather Tower.\n";
+        weatherTower.register(this);
+        WriteToFile.getWriteFile().writingToFile(write);
     }
 }
